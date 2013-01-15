@@ -7,6 +7,19 @@
  */
 
 ;(function(){
+
+    // Pad a number to 2 digits
+    function pad (n) {
+        return n < 10 ? '0' + n : n
+    }
+
+    // Template rendering
+    //   render('this is a {{x}}', { x : 'test' }) => 'this is a test'
+    function render (template, data) {
+        return template.replace(/\{\{(\w+)\}\}/g, function(m, key){
+            return data[key]
+        })
+    }
     
     var cid = 0                   // unique ID for jsonp callbacks
       , template = "{{template}}" // replaced with HTML template string on build
@@ -38,16 +51,6 @@
         return this
     }
 
-    function pad (n) {
-        return n < 10 ? '0' + n : n
-    }
-
-    function render (template, data) {
-        return template.replace(/\{\{(\w+)\}\}/g, function(m, key){
-            return data[key]
-        })
-    }
-
     // Receive data
     Repo.prototype.ready = function (results) {
 
@@ -73,6 +76,9 @@
         return output
     }
 
+    // Main object.
+    // GHRepos.create() receives a selector, for which each element will
+    // be replaced with a github repo box
     var GHRepos = {
         create: function (selector) {
             var els   = document.querySelectorAll(selector)
