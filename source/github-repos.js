@@ -45,24 +45,27 @@
     // Load GitHub data
     Repo.prototype.load = function () {
         var cached, s
+        // Attempt to get cached repo data
         if (window.sessionStorage && (cached = sessionStorage['gh-repos:'+this.repo])) {
             window[this.callback](cached)
+            return
         }
         s = document.createElement('script')
         s.async = true
         s.src = 'https://api.github.com/repos/' + this.repo + '?callback=' + this.callback
         document.body.appendChild(s)
-        return this
     }
 
     // Receive data
     Repo.prototype.ready = function (results) {
 
+        // Handle API failures
         if (results.meta.status >= 400 && results.data.message){
             console.warn(results.data.message)
             return
         }
 
+        // Cache data
         if (window.sessionStorage) {
             sessionStorage['gh-repos:'+this.repo] = results
         }
@@ -81,7 +84,7 @@
         box.innerHTML = render(template, data)
 
         this.target && this.target.parentNode.replaceChild(box, this.target)
-        return output
+        return box
     }
 
     // Main object.
