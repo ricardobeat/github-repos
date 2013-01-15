@@ -66,7 +66,7 @@
           , year      = pushed_at.getFullYear()
 
         data.pushed_at = pad(month) + '/' + pad(day) + '/' + year
-        data.repo_url  = data.url.replace(/api\.|repos\//g, '')
+        data.repo_url  = '//github.com/' + this.repo
 
         var box = document.createElement('div')
         box.className = 'github-box'
