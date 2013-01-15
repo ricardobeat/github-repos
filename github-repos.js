@@ -41,6 +41,11 @@
     // Receive data
     Repo.prototype.ready = function (results) {
 
+        if (results.meta.status >= 400 && results.data.message){
+            console.warn(results.data.message)
+            return
+        }
+
         var data = results.data
           , pushed_at = new Date(data.pushed_at)
 

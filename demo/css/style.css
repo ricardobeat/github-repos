@@ -55,10 +55,13 @@ h1 {
   border: 0;
 }
 
-.projects{
+.projects {
   width: 700px;
   margin: 0 auto;
   padding: 30px;
+}
+.projects a {
+  font-weight: 300;
 }
 
 /* Font-face */
