@@ -13,4 +13,4 @@ task 'build', ->
     output = source.replace '{{template}}', template
 
     fs.writeFileSync 'github-repos.js', output
-    cp.exec 'uglifyjs github-repos.js >> github-repos.min.js'
+    cp.exec 'uglifyjs github-repos.js > github-repos.min.js'
