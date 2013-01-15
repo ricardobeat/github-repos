@@ -61,6 +61,7 @@ h1 {
   padding: 30px;
 }
 .projects a {
+  display: block;
   font-weight: 300;
 }
 
