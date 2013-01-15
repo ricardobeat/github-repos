@@ -47,7 +47,7 @@
         var cached, s
         // Attempt to get cached repo data
         if (window.sessionStorage && (cached = sessionStorage['gh-repos:'+this.repo])) {
-            window[this.callback](cached)
+            window[this.callback](JSON.parse(cached))
             return
         }
         s = document.createElement('script')
@@ -67,7 +67,7 @@
 
         // Cache data
         if (window.sessionStorage) {
-            sessionStorage['gh-repos:'+this.repo] = results
+            sessionStorage['gh-repos:'+this.repo] = JSON.stringify(results)
         }
 
         var data      = results.data
