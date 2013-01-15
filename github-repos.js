@@ -44,7 +44,11 @@
 
     // Load GitHub data
     Repo.prototype.load = function () {
-        var s = document.createElement('script')
+        var cached, s
+        if (window.sessionStorage && (cached = sessionStorage['gh-repos:'+this.repo])) {
+            window[this.callback](cached)
+        }
+        s = document.createElement('script')
         s.async = true
         s.src = 'https://api.github.com/repos/' + this.repo + '?callback=' + this.callback
         document.body.appendChild(s)
@@ -57,6 +61,10 @@
         if (results.meta.status >= 400 && results.data.message){
             console.warn(results.data.message)
             return
+        }
+
+        if (window.sessionStorage) {
+            sessionStorage['gh-repos:'+this.repo] = results
         }
 
         var data      = results.data
