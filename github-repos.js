@@ -46,11 +46,18 @@
             return
         }
 
-        var data = results.data
+        var data      = results.data
           , pushed_at = new Date(data.pushed_at)
+          , month     = pushed_at.getMonth() + 1
+          , day       = pushed_at.getDate()
+          , year      = pushed_at.getFullYear()
 
-        data.pushed_at = [pushed_at.getMonth(), pushed_at.getDate(), pushed_at.getFullYear()].join('/')
-        data.repo_url  = data.url.replace('api.','').replace('repos/','')
+        function pad (n) {
+            return n < 10 ? '0' + n : n
+        }
+
+        data.pushed_at = pad(month) + '/' + pad(day) + '/' + year
+        data.repo_url  = data.url.replace(/api\.|repos\//g, '')
 
         var contents = template.replace(/\{\{(\w+)\}\}/g, function(m, key){
             return data[key]

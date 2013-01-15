@@ -42,6 +42,12 @@
         return n < 10 ? '0' + n : n
     }
 
+    function render (template, data) {
+        return template.replace(/\{\{(\w+)\}\}/g, function(m, key){
+            return data[key]
+        })
+    }
+
     // Receive data
     Repo.prototype.ready = function (results) {
 
@@ -59,15 +65,11 @@
         data.pushed_at = pad(month) + '/' + pad(day) + '/' + year
         data.repo_url  = data.url.replace(/api\.|repos\//g, '')
 
-        var contents = template.replace(/\{\{(\w+)\}\}/g, function(m, key){
-            return data[key]
-        })
+        var box = document.createElement('div')
+        box.className = 'github-box'
+        box.innerHTML = render(template, data)
 
-        var div = document.createElement('div')
-        div.className = 'github-box'
-        div.innerHTML = contents
-
-        this.target && this.target.parentNode.replaceChild(div, this.target)
+        this.target && this.target.parentNode.replaceChild(box, this.target)
         return output
     }
 
