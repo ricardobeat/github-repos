@@ -22,7 +22,7 @@
     }
     
     var cid = 0                   // unique ID for jsonp callbacks
-      , template = "<div class=\"github-box-header\">\n    <h3><a href=\"{{url}}\">{{name}}</a></h3>\n    <div class=\"github-stats\">\n        <a class=\"repo-watchers\" href=\"{{url}}/watchers\">{{watchers}}</a>\n        <a class=\"repo-forks\" href=\"{{url}}/forks\">{{forks}}</a>\n    </div>\n</div>\n<div class=\"github-box-content\">\n    <p>{{description}} &mdash; <a href=\"{{url}}#readme\">Read More</a></p>\n</div>\n<div class=\"github-box-download\">\n    <p class=\"repo-update\">Latest commit to <strong>master</strong> on {{pushed_at}}</p>\n    <a class=\"repo-download\" href=\"{{url}}/zipball/master\">Download as zip</a>\n</div>" // replaced with HTML template string on build
+      , template = "<div class=\"github-box-header\">\n    <h3><a href=\"{{html_url}}\">{{name}}</a></h3>\n    <div class=\"github-stats\">\n        <a class=\"repo-watchers\" href=\"{{html_url}}/watchers\">{{watchers}}</a>\n        <a class=\"repo-forks\" href=\"{{html_url}}/forks\">{{forks}}</a>\n    </div>\n</div>\n<div class=\"github-box-content\">\n    <p>{{description}} &mdash; <a href=\"{{html_url}}#readme\">Read More</a></p>\n</div>\n<div class=\"github-box-download\">\n    <p class=\"repo-update\">Latest commit to <strong>master</strong> on {{pushed_at}}</p>\n    <a class=\"repo-download\" href=\"{{html_url}}/zipball/master\">Download as zip</a>\n</div>" // replaced with HTML template string on build
 
     // Private function to generate a jsonp callback
     // which deletes itself upon invocation
